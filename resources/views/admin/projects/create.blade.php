@@ -15,6 +15,15 @@
                     {{$message}}
                 @enderror
             </div>
+            <div class="mb-3 form-group">
+                <h4>Tech</h4>
+                <div class="form-check">
+                  @foreach($technologies as $technology)
+                    <input id="technology_{{$technology->id}}" name="technologies[]" type="checkbox" value="{{$technology->id}}" @checked(in_array($technology->id, old('technologies', [])))>
+                    <label for="technology_{{$technology->id}}">{{$technology->name}}</label>
+                  @endforeach
+                </div>
+            </div>
             <div class="mb-3">
                 <label for="title">Title</label>
                 <input type="text" name="title" id="title" class="form-control @error('title') is-invalid @enderror" value="{{old('title')}}">
