@@ -2,6 +2,7 @@
 @section('content')
     <div class="container">
         <h1 style="text-align: center">Here's the text</h1>
+        <img src="{{asset('storage/' . $project->image)}}" alt="">
         <h3 style="text-align: center">Title: {{$project->title}}</h3>
         <p style="text-align: center">Type: {{$project->type->name}}</p>
         <p style="text-align: center">Slug: {{$project->slug}}</p>

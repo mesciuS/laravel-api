@@ -7,6 +7,7 @@ use App\Models\Project;
 use App\Models\Technology;
 use App\Models\Type;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 
@@ -47,6 +48,10 @@ class ProjectController extends Controller
         $formData = $request->all();
         $this->validation($formData);
         $project = new Project();
+        if($request->hasFile('image')) {
+            $path = Storage::put('img', $request->image);
+            $formData['image'] = $path;
+        };
         $project->fill($formData);
         $project->slug = Str::slug($project->title, '-');
         $project->save();
@@ -111,12 +116,14 @@ class ProjectController extends Controller
             'title' => 'required|max:255|min:5',
             'text' => 'required',
             'type_id' => 'nullable|exists:types,id',
+            'image' => 'nullable|image|max:5000'
         ], [
             'title.max' => 'Il titolo deve avere massimo :max caratteri',
             'title.required' => 'Devi inserire un titolo',
             'title.min' => 'Il titolo deve avere minimo :min caratteri',
             'text.required' => 'Il project deve avere un contenuto',
             'type_id.exists' => 'La type deve essere esistente nel nostro sito',
+            'image.max' => 'L immagine è troppo grande',
         ])->validate();
     }
 }
