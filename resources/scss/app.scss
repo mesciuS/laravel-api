@@ -22,3 +22,14 @@
       flex-grow: 1;
     }
 }
+
+img {
+  height: 400px;
+  width: 400px;
+}
+
+.btn-container {
+  display: flex;
+  justify-content: center;
+  gap: 2em;
+}

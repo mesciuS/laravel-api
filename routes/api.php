@@ -25,3 +25,4 @@ Route::get('test', function() {
 });
 
 Route::get('projects', [ProjectController:: class, 'index']);
+Route::get('/projects/{slu}', [ProjectController::class, 'show']);
